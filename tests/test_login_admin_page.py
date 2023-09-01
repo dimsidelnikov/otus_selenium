@@ -1,11 +1,13 @@
 from page_objects.login_admin_page import LoginAdminPage
-from exception_handling import wait_element
+from urllib.parse import urljoin
+
+admin_path = 'admin'
 
 
 def test_login_admin_page_find_elements(browser):
-    browser.get(browser.url + '/admin')
-    wait_element(LoginAdminPage.USERNAME_INPUT, browser)
-    wait_element(LoginAdminPage.PASSWORD_INPUT, browser)
-    wait_element(LoginAdminPage.FORGOTTEN_PASSWORD, browser)
-    wait_element(LoginAdminPage.SUBMIT_BUTTON, browser)
-    wait_element(LoginAdminPage.LOGO, browser)
+    browser.get(urljoin(browser.url, admin_path))
+    LoginAdminPage(browser).wait_element(LoginAdminPage.USERNAME_INPUT)
+    LoginAdminPage(browser).wait_element(LoginAdminPage.PASSWORD_INPUT)
+    LoginAdminPage(browser).wait_element(LoginAdminPage.FORGOTTEN_PASSWORD)
+    LoginAdminPage(browser).wait_element(LoginAdminPage.SUBMIT_BUTTON)
+    LoginAdminPage(browser).wait_element(LoginAdminPage.LOGO)
