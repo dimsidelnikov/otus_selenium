@@ -1,11 +1,17 @@
 from page_objects.index_page import IndexPage
-from exception_handling import wait_element
 
 
 def test_index_page_find_elements(browser):
     browser.get(browser.url)
-    wait_element(IndexPage.TOP_NAVIGATION, browser)
-    wait_element(IndexPage.LOGO, browser)
-    wait_element(IndexPage.SEARCH_STRING, browser)
-    wait_element(IndexPage.MENU, browser)
-    wait_element(IndexPage.CART_BUTTON, browser)
+    IndexPage(browser).wait_element(IndexPage.TOP_NAVIGATION)
+    IndexPage(browser).wait_element(IndexPage.LOGO)
+    IndexPage(browser).wait_element(IndexPage.SEARCH_STRING)
+    IndexPage(browser).wait_element(IndexPage.MENU)
+    IndexPage(browser).wait_element(IndexPage.CART_BUTTON)
+
+
+def test_currency_selection(browser):
+    browser.get(browser.url)
+    IndexPage(browser).choose_euro()
+    IndexPage(browser).choose_pound()
+    IndexPage(browser).choose_dollar()
