@@ -1,3 +1,5 @@
+import allure
+
 from selenium.webdriver.common.by import By
 from page_objects.base_page import BasePage
 from helpers import random_string, random_email, random_phone
@@ -15,6 +17,7 @@ class RegisterAccountPage(BasePage):
     SUBMIT_BUTTON = (By.CSS_SELECTOR, 'input[type=submit][value=Continue]')
     WARNING_PRIVACY_POLICY = (By.CSS_SELECTOR, '.alert')
 
+    @allure.step("Ввод данных нового пользователя")
     def input_new_user_info(self):
         self.input(self.wait_element(self.FIRSTNAME_INPUT), random_string())
         self.input(self.wait_element(self.LASTNAME_INPUT), random_string())
@@ -26,9 +29,11 @@ class RegisterAccountPage(BasePage):
         self.input(self.wait_element(self.PASSWORD_INPUT), password)
         self.input(self.wait_element(self.CONFIRM_INPUT), password)
 
+    @allure.step("Согласие с политикой конфиденциальности")
     def agree_with_privacy_policy(self):
         self.click(self.wait_element(self.CHECKBOX_AGREE_POLICY))
 
+    @allure.step("Создание пользователя")
     def create_user(self, url, title):
         self.click(self.wait_element(self.SUBMIT_BUTTON))
         assert self.driver.current_url == url

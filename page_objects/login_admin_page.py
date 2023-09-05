@@ -1,3 +1,5 @@
+import allure
+
 from selenium.webdriver.common.by import By
 from page_objects.base_page import BasePage
 
@@ -9,6 +11,7 @@ class LoginAdminPage(BasePage):
     SUBMIT_BUTTON = (By.CSS_SELECTOR, 'button[type=submit]')
     LOGO = (By.CSS_SELECTOR, 'img[title=OpenCart]')
 
+    @allure.step("Авторизация под пользователем {username}")
     def login(self, username, password):
         self.input(self.wait_element(self.USERNAME_INPUT), username)
         self.input(self.wait_element(self.PASSWORD_INPUT), password)
