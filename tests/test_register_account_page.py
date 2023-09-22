@@ -1,3 +1,5 @@
+import allure
+
 from page_objects.register_account_page import RegisterAccountPage
 from urllib.parse import urljoin
 
@@ -6,6 +8,7 @@ success_reg_path = 'index.php?route=account/success'
 success_title = 'Your Account Has Been Created!'
 
 
+@allure.title("Тест обнаружения элементов")
 def test_register_account_page_find_elements(browser):
     browser.get(urljoin(browser.url, reg_page_path))
     RegisterAccountPage(browser).wait_element(RegisterAccountPage.FIRSTNAME_INPUT)
@@ -22,6 +25,7 @@ def test_register_account_page_find_elements(browser):
     RegisterAccountPage(browser).wait_element(RegisterAccountPage.WARNING_PRIVACY_POLICY, 0.5)
 
 
+@allure.title("Тест регистрации нового пользователя")
 def test_reg_new_user(browser):
     browser.get(urljoin(browser.url, reg_page_path))
     RegisterAccountPage(browser).input_new_user_info()

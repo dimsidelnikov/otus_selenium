@@ -1,9 +1,12 @@
+import allure
+
 from page_objects.product_card_page import ProductCardPage
 from urllib.parse import urljoin
 
 macbook_path = 'laptop-notebook/macbook'
 
 
+@allure.title("Тест обнаружения элементов")
 def test_product_card_page_find_elements(browser):
     browser.get(urljoin(browser.url, macbook_path))
     ProductCardPage(browser).wait_element(ProductCardPage.PRODUCT_NAME)

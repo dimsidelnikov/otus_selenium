@@ -1,9 +1,12 @@
+import allure
+
 from page_objects.login_admin_page import LoginAdminPage
 from urllib.parse import urljoin
 
 admin_path = 'admin'
 
 
+@allure.title("Тест обнаружения элементов")
 def test_login_admin_page_find_elements(browser):
     browser.get(urljoin(browser.url, admin_path))
     LoginAdminPage(browser).wait_element(LoginAdminPage.USERNAME_INPUT)
