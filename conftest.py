@@ -1,6 +1,7 @@
 import pytest
 import logging
 import datetime
+import os
 
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions, FirefoxOptions, EdgeOptions
@@ -28,8 +29,11 @@ def browser(request):
 
     executor_url = f"http://{executor}:4444/wd/hub"
 
+    logs_dir = 'logs'
+    os.makedirs(logs_dir, exist_ok=True)
+
     logger = logging.getLogger(request.node.name)
-    file_handler = logging.FileHandler(f"logs/{request.node.name}.log")
+    file_handler = logging.FileHandler(f"{logs_dir}/{request.node.name}.log")
     file_handler.setFormatter(logging.Formatter('%(asctime)s - [%(levelname)s] - %(message)s'))
     logger.addHandler(file_handler)
     logger.setLevel(level=log_level)
